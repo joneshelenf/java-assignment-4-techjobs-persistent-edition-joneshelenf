@@ -12,35 +12,34 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("Skills")
+@RequestMapping("skills")
 public class SkillController {
+
     @Autowired
     private SkillRepository skillRepository;
 
-    @GetMapping
-    private String displayAllSkills(Model model) {
-        model.addAttribute("title", "List of Skills");
-        model.addAttribute("skills",skillRepository.findAll());
+    @GetMapping("")
+    public String index(Model model) {
+//        model.addAttribute("title", "All Skills");
+        model.addAttribute("skills", skillRepository.findAll());
         return "skills/index";
     }
 
     @GetMapping("add")
-    public String displayAddSkillsForm(Model model) {
+    public String displayAddSkillForm(Model model) {
         model.addAttribute(new Skill());
         return "skills/add";
     }
 
     @PostMapping("add")
-    public String processAddSkillsForm(@ModelAttribute @Valid Skill newSkill,
-                                       Errors errors, Model model) {
-
+    public String processAddSkillForm(@ModelAttribute @Valid Skill newSkill, Errors errors, Model model) {
         if (errors.hasErrors()) {
+
             return "skills/add";
         }
         skillRepository.save(newSkill);
-        return "redirect:";
+        return "redirect:./";
     }
-
 
     @GetMapping("view/{skillId}")
     public String displayViewSkill(Model model, @PathVariable int skillId) {
@@ -49,11 +48,12 @@ public class SkillController {
         if (optSkill.isPresent()) {
             Skill skill = (Skill) optSkill.get();
             model.addAttribute("skill", skill);
-            model.addAttribute("");
             return "skills/view";
-        } else {
+        }
+        else {
             return "redirect:../";
         }
     }
-}
 
+
+}
