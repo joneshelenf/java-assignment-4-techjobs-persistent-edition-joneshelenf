@@ -1,7 +1,6 @@
 package org.launchcode.techjobs.persistent.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -11,32 +10,15 @@ public class Job extends AbstractEntity {
     private Employer employer;
 
     @ManyToMany
-    @NotNull(message = "Choose a skill to continue.")
     private List<Skill> skills;
 
-    public Job() {} //no arg constructor!!!!!!!!!!!!!!!
-
-//    @Id
-//    @GeneratedValue
-//    private int id;
-//    private String name;
-//    private String employer;
-//    private String skills;
+    public Job() {}
 
     public Job(Employer anEmployer, List<Skill> someSkills) {
         super();
         this.employer = anEmployer;
         this.skills = someSkills;
     }
-
-    // Getters and setters.
-
-//    public String getName() {
-//        return name;
-//    }
-//    public void setName(String name) {
-//        this.name = name;
-//    }
 
     public Employer getEmployer() {
 
