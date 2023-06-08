@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 public class Skill extends AbstractEntity {
 
-    @Size(min = 10, max = 500, message = "Enter a description between 10 and 500 characters long.")
+    @Size(min = 10, max = 255, message = "Enter a description between 10 and 255 characters long.")
     private String description;
 
     @ManyToMany(mappedBy="skills")
@@ -34,6 +34,5 @@ public class Skill extends AbstractEntity {
         this.description = description;
     }
 
-    //no arg constructor?!?!?!????????!?
     public Skill() { }
 }
