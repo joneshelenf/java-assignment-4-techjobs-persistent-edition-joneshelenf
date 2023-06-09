@@ -52,9 +52,10 @@ public class HomeController {
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                     Errors errors, Model model, @RequestParam int employerId,
-                                    @RequestParam("skills") List<Integer> skills) {
+                                    @RequestParam List<Integer> skills) {
 
         if (errors.hasErrors()) {
+            model.addAttribute("title", "New Job");
             return "add";
         }
 
@@ -72,7 +73,7 @@ public class HomeController {
         model.addAttribute("employers", employerRepository.findAll());
         model.addAttribute("skills", skillRepository.findAll());
 
-        return "add/";
+        return "redirect:/";
     }
 
     @GetMapping("view/{jobId}")
@@ -81,9 +82,9 @@ public class HomeController {
         if (optJob.isPresent()) {
             Job job = (Job) optJob.get();
             model.addAttribute("job", job);
-            return "view";
+            return "view/";
         } else {
-            return "redirect:";
+            return "redirect:/";
         }
 
 
