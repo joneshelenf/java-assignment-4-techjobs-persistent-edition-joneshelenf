@@ -12,14 +12,10 @@ WHERE location = "St. Louis City";
 
 -- Part 3: Test it with SQL remove job table
 DROP TABLE job;
---DROP TABLE job_skills;
---DROP TABLE skills;
 
 -- Part 4: Test it with SQL write a query to return the names of all skills that are attached to jobs in alphabetical order.
 --If a skill does not have a job listed, it should not be included in the results of this query
 SELECT *
 FROM skill
-INNER JOIN job_skills ON skill.id = job_skills.skills_id
-WHERE job_skills.jobs_id IS NOT NULL
 ORDER BY name ASC;
 
